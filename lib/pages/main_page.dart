@@ -16,6 +16,7 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
+      navigationBar: const CupertinoNavigationBar(middle: Text('BMI')),
       child: CupertinoTabScaffold(
         tabBar: CupertinoTabBar(
           items: const [
