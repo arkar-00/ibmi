@@ -1,6 +1,7 @@
 import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:ibmi/utils/calculator.dart';
 import 'package:ibmi/widgets/infor_card.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -181,23 +182,15 @@ class _BmiPageState extends State<BmiPage> {
 
   void _calculateBMI() {
     if (_height > 0 && _weight > 0 && _age > 0) {
-      final bmi = 703 * (_weight / pow(_height, 2));
+      final bmi = calculateBMI(_weight, _height);
       _showResultDialog(bmi);
       // You can push to result page or show CupertinoDialog here
     }
   }
 
   void _showResultDialog(double bmi) {
-    String? status;
-    if (bmi < 18.5) {
-      status = "Underweight";
-    } else if (bmi < 24.9) {
-      status = "Normal weight";
-    } else if (bmi < 29.9) {
-      status = "Overweight";
-    } else {
-      status = "Obesity";
-    }
+    String status = getBMICategory(bmi);
+
     showCupertinoDialog(
       context: context,
       builder: (context) {
